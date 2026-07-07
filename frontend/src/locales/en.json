@@ -1,0 +1,97 @@
+{
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "portfolio": "Portfolio",
+    "team": "Our Team",
+    "testimonials": "Testimonials",
+    "blog": "Blog",
+    "contact": "Contact Us",
+    "admin": "Admin Panel",
+    "login": "Login",
+    "logout": "Logout",
+    "dashboard": "Dashboard"
+  },
+  "hero": {
+    "title_part1": "We turn your ideas into",
+    "title_part2": "Powerful Code",
+    "title_part3": "",
+    "subtitle": "C0 Team consists of passionate developers and designers ready to build robust web systems, mobile applications, and AI integrations with premium quality.",
+    "contact_btn": "Get Free Consultation",
+    "portfolio_btn": "View Portfolio"
+  },
+  "services": {
+    "title": "Our Services",
+    "subtitle": "Professional capabilities tailored to accelerate your business growth"
+  },
+  "portfolio": {
+    "title": "Our Work",
+    "subtitle": "Explore some of the recent projects successfully developed by C0 Team",
+    "all": "All",
+    "web": "Web Apps",
+    "mobile": "Mobile Apps",
+    "ai": "Artificial Intelligence",
+    "design": "UI/UX Design",
+    "other": "Others",
+    "tech_stack": "Tech Stack:",
+    "view_demo": "Live Demo",
+    "github_code": "Source Code"
+  },
+  "team": {
+    "title": "Meet the Team",
+    "subtitle": "Creative developers and designers dedicated to your success"
+  },
+  "testimonials": {
+    "title": "What Clients Say",
+    "subtitle": "Honest reviews and testimonials from our collaborative partners"
+  },
+  "blog": {
+    "title": "Latest Insights",
+    "subtitle": "Tech news, development tutorials, and updates from C0 Team",
+    "read_more": "Read More",
+    "views": "Views"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Got a project in mind? Drop us a line and let's build it together",
+    "name": "Full Name",
+    "email": "Email Address",
+    "subject": "Subject",
+    "message": "Your Message",
+    "send": "Send Message",
+    "sending": "Sending...",
+    "success": "Your message was sent successfully. We will contact you soon.",
+    "error": "Error sending message. Please try again."
+  },
+  "admin": {
+    "title": "C0 Team Admin Panel",
+    "dashboard": "Dashboard",
+    "projects": "Manage Projects",
+    "members": "Manage Team",
+    "services": "Manage Services",
+    "blog": "Manage Blog",
+    "testimonials": "Manage Testimonials",
+    "messages": "Messages Inbox",
+    "settings": "Site Settings",
+    "stats_overview": "Stats Overview",
+    "recent_messages": "Recent Messages",
+    "no_messages": "No messages found.",
+    "total_projects": "Total Projects",
+    "total_articles": "Total Articles",
+    "total_members": "Team Members",
+    "total_views": "Blog Views",
+    "unread_messages": "Unread Messages",
+    "total_messages": "Total Messages",
+    "pending_testimonials": "Pending Testimonials",
+    "read": "Read",
+    "unread": "Unread",
+    "mark_as_read": "Mark as Read",
+    "delete": "Delete",
+    "add_new": "Add New Item",
+    "edit": "Edit",
+    "save": "Save Changes",
+    "cancel": "Cancel",
+    "username": "Username",
+    "password": "Password"
+  }
+}
