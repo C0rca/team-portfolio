@@ -14,9 +14,12 @@ ENV/
 *.py[cod]
 *$py.class
 
-# Database and Media (Committed as requested by user to keep all data)
+# Database and Media (Committed as requested by user to keep db.sqlite3)
 # backend/db.sqlite3
-# backend/media/
+backend/media/avatars/
+backend/media/projects/
+backend/media/blog/
+backend/media/testimonials/
 
 # IDE and Editor files
 .vscode/
