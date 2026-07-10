@@ -1,1 +1,1 @@
-import BlogDetail from "../../../../src/pages/client/BlogDetail"; export default function Page({ params }) { return <BlogDetail />; }
+import BlogDetail from "../../../../src/views/client/BlogDetail"; export default function Page({ params }) { return <BlogDetail />; }

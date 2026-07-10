@@ -1,1 +1,1 @@
-import BlogManager from "../../../src/pages/admin/BlogManager"; export default function Page() { return <BlogManager />; }
+import BlogManager from "../../../src/views/admin/BlogManager"; export default function Page() { return <BlogManager />; }

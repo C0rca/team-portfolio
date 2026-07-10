@@ -1,4 +1,4 @@
-import Home from "../../src/pages/client/Home";
+import Home from "../../src/views/client/Home";
 
 async function getHomepageData() {
   const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000';

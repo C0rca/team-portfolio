@@ -1,1 +1,1 @@
-import MessageManager from "../../../src/pages/admin/MessageManager"; export default function Page() { return <MessageManager />; }
+import MessageManager from "../../../src/views/admin/MessageManager"; export default function Page() { return <MessageManager />; }

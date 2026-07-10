@@ -1,1 +1,1 @@
-import Portfolio from "../../../src/pages/client/Portfolio"; export default function Page() { return <Portfolio />; }
+import Portfolio from "../../../src/views/client/Portfolio"; export default function Page() { return <Portfolio />; }

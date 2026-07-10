@@ -1,1 +1,1 @@
-import Login from "../../../src/pages/client/Login"; export default function Page() { return <Login />; }
+import Login from "../../../src/views/client/Login"; export default function Page() { return <Login />; }

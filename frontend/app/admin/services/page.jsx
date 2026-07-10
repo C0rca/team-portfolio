@@ -1,1 +1,1 @@
-import ServiceManager from "../../../src/pages/admin/ServiceManager"; export default function Page() { return <ServiceManager />; }
+import ServiceManager from "../../../src/views/admin/ServiceManager"; export default function Page() { return <ServiceManager />; }

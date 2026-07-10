@@ -1,1 +1,1 @@
-import TeamManager from "../../../src/pages/admin/TeamManager"; export default function Page() { return <TeamManager />; }
+import TeamManager from "../../../src/views/admin/TeamManager"; export default function Page() { return <TeamManager />; }
