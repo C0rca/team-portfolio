@@ -31,6 +31,7 @@ echo ==============================================
 echo  Both services are launching in separate windows!
 echo  Backend: http://127.0.0.1:8000
 echo  Frontend: http://localhost:5173
+echo  Admin panel: http://localhost:5173/admin-login (admin-admin)
 echo ==============================================
 echo.
 pause

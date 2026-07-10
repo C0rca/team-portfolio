@@ -50,7 +50,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/portfolio" element={<Portfolio />} />
                 <Route path="/blog/:slug" element={<BlogDetail />} />
-                <Route path="/login" element={<Login />} />
+                <Route path="/admin-login" element={<Login />} />
               </Route>
 
               {/* Admin Panel Routes */}

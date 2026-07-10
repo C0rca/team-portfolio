@@ -3,13 +3,12 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { useTheme } from '../../context/ThemeContext';
 import { useLanguage } from '../../context/LanguageContext';
-import { useAuth, API_BASE_URL } from '../../context/AuthContext';
-import { Sun, Moon, Globe, Menu, X, LogIn, LogOut, LayoutDashboard } from 'lucide-react';
+import { API_BASE_URL } from '../../context/AuthContext';
+import { Sun, Moon, Globe, Menu, X } from 'lucide-react';
 
 const Navbar = () => {
   const { theme, toggleTheme } = useTheme();
   const { language, toggleLanguage, t } = useLanguage();
-  const { user, logout } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [logoText, setLogoText] = useState('C0 Team');
@@ -96,21 +95,7 @@ const Navbar = () => {
             {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
           </button>
 
-          {/* Auth Button */}
-          {user ? (
-            <div className="auth-actions-group">
-              <Link to="/admin/dashboard" className="action-btn admin-btn" title={t('nav.dashboard')}>
-                <LayoutDashboard size={18} />
-              </Link>
-              <button onClick={logout} className="action-btn logout-btn" title={t('nav.logout')}>
-                <LogOut size={18} />
-              </button>
-            </div>
-          ) : (
-            <Link to="/login" className="action-btn login-btn" title={t('nav.login')}>
-              <LogIn size={18} />
-            </Link>
-          )}
+
 
           {/* Mobile menu toggle */}
           <button className="mobile-toggle-btn" onClick={() => setIsOpen(!isOpen)}>
@@ -140,29 +125,7 @@ const Navbar = () => {
               <span>{theme === 'dark' ? 'Light' : 'Dark'}</span>
             </button>
           </li>
-          {user ? (
-            <>
-              <li className="mobile-nav-item">
-                <Link to="/admin/dashboard" onClick={() => setIsOpen(false)} className="mobile-nav-link-btn flex-center">
-                  <LayoutDashboard size={18} />
-                  <span style={{ margin: '0 8px' }}>{t('nav.dashboard')}</span>
-                </Link>
-              </li>
-              <li className="mobile-nav-item">
-                <button onClick={() => { logout(); setIsOpen(false); }} className="mobile-nav-link-btn flex-center btn-logout-text">
-                  <LogOut size={18} />
-                  <span style={{ margin: '0 8px' }}>{t('nav.logout')}</span>
-                </button>
-              </li>
-            </>
-          ) : (
-            <li className="mobile-nav-item">
-              <Link to="/login" onClick={() => setIsOpen(false)} className="mobile-nav-link-btn flex-center btn-login-text">
-                <LogIn size={18} />
-                <span style={{ margin: '0 8px' }}>{t('nav.login')}</span>
-              </Link>
-            </li>
-          )}
+
         </ul>
       </div>
     </nav>
