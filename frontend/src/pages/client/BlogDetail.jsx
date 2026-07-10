@@ -1,5 +1,7 @@
+"use client";
 import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import Link from 'next/link';
+import { useParams } from 'next/navigation';
 import axios from 'axios';
 import { useLanguage } from '../../context/LanguageContext';
 import { API_BASE_URL } from '../../context/AuthContext';
@@ -43,7 +45,7 @@ const BlogDetail = () => {
           {error}
         </div>
         <div>
-          <Link to="/" className="btn btn-secondary">
+          <Link href="/" className="btn btn-secondary">
             {language === 'fa' ? 'بازگشت به خانه' : 'Go Back Home'}
           </Link>
         </div>
@@ -58,7 +60,7 @@ const BlogDetail = () => {
 
       <div className="blog-detail-card glass-panel">
         {/* Back Button */}
-        <Link to="/" className="back-link">
+        <Link href="/" className="back-link">
           {language === 'fa' ? <ArrowRight size={18} /> : <ArrowLeft size={18} />}
           <span>{language === 'fa' ? 'بازگشت به خانه' : 'Back to Home'}</span>
         </Link>

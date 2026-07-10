@@ -1,13 +1,15 @@
+"use client";
 import React, { useState } from 'react';
-import { useNavigate, Navigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import { useAuth } from '../../context/AuthContext';
 import { useLanguage } from '../../context/LanguageContext';
 import { LogIn, Lock, User } from 'lucide-react';
 
+import { useEffect } from "react";
 const Login = () => {
   const { user, login } = useAuth();
   const { language, t } = useLanguage();
-  const navigate = useNavigate();
+  const navigate = useRouter();
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -15,9 +17,13 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
 
   // If already logged in, redirect to admin dashboard
-  if (user) {
-    return <Navigate to="/admin/dashboard" replace />;
-  }
+  
+  useEffect(() => {
+    if (user) {
+      navigate.push('/admin/dashboard');
+    }
+  }, [user, navigate]);
+  if (user) return null;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,7 +34,7 @@ const Login = () => {
     setLoading(false);
 
     if (result.success) {
-      navigate('/admin/dashboard');
+      navigate.push('/admin/dashboard');
     } else {
       setError(result.message || (language === 'fa' ? 'خطا در ورود' : 'Login Error'));
     }

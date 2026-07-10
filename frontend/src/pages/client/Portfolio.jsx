@@ -1,5 +1,6 @@
+"use client";
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import axios from 'axios';
 import { useLanguage } from '../../context/LanguageContext';
 import { API_BASE_URL } from '../../context/AuthContext';
@@ -61,7 +62,7 @@ const Portfolio = () => {
           </div>
           
           <div className="back-home-btn-wrapper">
-            <Link to="/" className="back-home-btn">
+            <Link href="/" className="back-home-btn">
               {language === 'fa' ? <ArrowRight size={16} /> : <ArrowLeft size={16} />}
               <span>{language === 'fa' ? 'بازگشت به خانه' : 'Back to Home'}</span>
             </Link>

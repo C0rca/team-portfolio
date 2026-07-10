@@ -1,5 +1,7 @@
+"use client";
 import React, { useState } from 'react';
-import { Link, useNavigate, useLocation, Navigate, Outlet } from 'react-router-dom';
+import Link from 'next/link';
+import { useRouter, usePathname } from 'next/navigation';
 import { useAuth } from '../../context/AuthContext';
 import { useLanguage } from '../../context/LanguageContext';
 import { useTheme } from '../../context/ThemeContext';
@@ -8,14 +10,22 @@ import {
   MessageSquare, Settings, LogOut, Home, Menu, X, Sun, Moon, Globe 
 } from 'lucide-react';
 
-const AdminLayout = () => {
+import { useEffect } from "react";
+const AdminLayout = ({ children }) => {
   const { user, logout, loading } = useAuth();
   const { language, toggleLanguage, t } = useLanguage();
   const { theme, toggleTheme } = useTheme();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   
-  const navigate = useNavigate();
-  const location = useLocation();
+  const navigate = useRouter();
+  const pathname = usePathname();
+
+  // Redirect to login if not authenticated
+  useEffect(() => {
+    if (!loading && !user) {
+      navigate.push('/admin-login');
+    }
+  }, [user, loading, navigate]);
 
   if (loading) {
     return (
@@ -27,10 +37,7 @@ const AdminLayout = () => {
     );
   }
 
-  // Redirect to login if not authenticated
-  if (!user) {
-    return <Navigate to="/admin-login" replace />;
-  }
+  if (!user) return null;
 
   const menuItems = [
     { label: t('admin.dashboard'), path: '/admin/dashboard', icon: LayoutDashboard },
@@ -45,7 +52,7 @@ const AdminLayout = () => {
 
   const handleLogout = () => {
     logout();
-    navigate('/');
+    navigate.push('/');
   };
 
   return (
@@ -64,7 +71,7 @@ const AdminLayout = () => {
       {/* 2. Admin Sidebar */}
       <aside className={`admin-sidebar glass-panel ${sidebarOpen ? 'open' : ''}`}>
         <div className="admin-logo-section">
-          <Link to="/" className="admin-logo">
+          <Link href="/" className="admin-logo">
             <span className="logo-c">C0</span>
             <span className="logo-team">Team</span>
             <span className="logo-badge-admin">Admin</span>
@@ -75,11 +82,11 @@ const AdminLayout = () => {
           <ul className="admin-menu">
             {menuItems.map((item, idx) => {
               const IconComponent = item.icon;
-              const isActive = location.pathname === item.path;
+              const isActive = pathname === item.path;
               return (
                 <li key={idx}>
                   <Link 
-                    to={item.path} 
+                    href={item.path} 
                     className={`admin-nav-link ${isActive ? 'active' : ''}`}
                     onClick={() => setSidebarOpen(false)}
                   >
@@ -93,7 +100,7 @@ const AdminLayout = () => {
         </nav>
 
         <div className="admin-footer-actions">
-          <Link to="/" className="admin-nav-link site-link">
+          <Link href="/" className="admin-nav-link site-link">
             <Home size={18} />
             <span>{language === 'fa' ? 'بازگشت به سایت' : 'Go to Site'}</span>
           </Link>
@@ -132,7 +139,7 @@ const AdminLayout = () => {
 
         {/* Content Outlet for children pages */}
         <div className="admin-page-content animate-fade-in">
-          <Outlet />
+          {children}
         </div>
       </main>
     </div>

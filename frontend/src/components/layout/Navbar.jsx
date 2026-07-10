@@ -1,5 +1,7 @@
+"use client";
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import Link from 'next/link';
+import { useRouter, usePathname } from 'next/navigation';
 import axios from 'axios';
 import { useTheme } from '../../context/ThemeContext';
 import { useLanguage } from '../../context/LanguageContext';
@@ -13,8 +15,8 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [logoText, setLogoText] = useState('C0 Team');
   
-  const navigate = useNavigate();
-  const location = useLocation();
+  const navigate = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -36,8 +38,8 @@ const Navbar = () => {
 
   const handleNavClick = (sectionId) => {
     setIsOpen(false);
-    if (location.pathname !== '/') {
-      navigate('/', { state: { scrollTo: sectionId } });
+    if (pathname !== '/') {
+      navigate.push('/#' + sectionId);
     } else {
       const element = document.getElementById(sectionId);
       if (element) {
@@ -60,7 +62,7 @@ const Navbar = () => {
     <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
       <div className="navbar-container">
         {/* Logo */}
-        <Link to="/" className="navbar-logo" onClick={() => handleNavClick('home')}>
+        <Link href="/" className="navbar-logo" onClick={() => handleNavClick('home')}>
           {logoText && logoText.includes(' ') ? (
             <>
               <span className="logo-c">{logoText.split(' ')[0]}</span>{' '}
@@ -85,13 +87,13 @@ const Navbar = () => {
         {/* Right side controls (theme, lang, auth) */}
         <div className="nav-actions">
           {/* Language Toggle */}
-          <button onClick={toggleLanguage} className="action-btn lang-btn" title="Toggle Language">
+          <button onClick={toggleLanguage} className="action-btn lang-btn" title="Toggle Language" suppressHydrationWarning>
             <Globe size={18} />
-            <span>{language === 'fa' ? 'EN' : 'FA'}</span>
+            <span suppressHydrationWarning>{language === 'fa' ? 'EN' : 'FA'}</span>
           </button>
 
           {/* Theme Toggle */}
-          <button onClick={toggleTheme} className="action-btn theme-btn" title="Toggle Theme">
+          <button onClick={toggleTheme} className="action-btn theme-btn" title="Toggle Theme" suppressHydrationWarning>
             {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
           </button>
 

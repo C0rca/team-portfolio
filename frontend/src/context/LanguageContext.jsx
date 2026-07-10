@@ -1,3 +1,4 @@
+"use client";
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import faTranslations from '../locales/fa.json';
 import enTranslations from '../locales/en.json';
@@ -11,6 +12,7 @@ const translations = {
 
 export const LanguageProvider = ({ children }) => {
   const [language, setLanguage] = useState(() => {
+    if (typeof window === 'undefined') return 'fa';
     return localStorage.getItem('language') || 'fa'; // Default to Persian (RTL)
   });
 

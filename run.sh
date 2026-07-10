@@ -19,11 +19,14 @@ if [ ! -d "frontend/node_modules" ]; then
     cd frontend && npm install && cd ..
 fi
 
+# Kill any existing processes on these ports before starting
+lsof -ti:8000 -ti:5173 | xargs kill -9 2>/dev/null
+
 echo "Starting Django Backend on http://127.0.0.1:8000 ..."
 (cd backend && source .venv/bin/activate && python manage.py runserver) &
 BACKEND_PID=$!
 
-echo "Starting React + Vite Frontend on http://localhost:5173 ..."
+echo "Starting Next.js Frontend on http://localhost:5173 ..."
 (cd frontend && npm run dev) &
 FRONTEND_PID=$!
 
@@ -38,5 +41,5 @@ echo "=============================================="
 echo ""
 
 # Wait for Ctrl+C to stop both servers
-trap "echo 'Stopping servers...'; kill $BACKEND_PID $FRONTEND_PID; exit" INT
+trap "echo 'Stopping servers...'; lsof -ti:8000 -ti:5173 | xargs kill -9 2>/dev/null; exit" INT
 wait

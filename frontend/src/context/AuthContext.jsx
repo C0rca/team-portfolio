@@ -1,3 +1,4 @@
+"use client";
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 
@@ -7,9 +8,9 @@ const AuthContext = createContext();
 export const API_BASE_URL = 'http://127.0.0.1:8000';
 
 export const AuthProvider = ({ children }) => {
-  const [token, setToken] = useState(() => localStorage.getItem('access_token'));
+  const [token, setToken] = useState(() => (typeof window !== 'undefined' ? localStorage.getItem('access_token') : null));
   const [user, setUser] = useState(() => {
-    const savedUser = localStorage.getItem('user');
+    const savedUser = (typeof window !== 'undefined' ? localStorage.getItem('user') : null);
     return savedUser ? JSON.parse(savedUser) : null;
   });
   const [loading, setLoading] = useState(true);

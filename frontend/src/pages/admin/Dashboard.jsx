@@ -1,5 +1,6 @@
+"use client";
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import { useLanguage } from '../../context/LanguageContext';
 import { API_BASE_URL } from '../../context/AuthContext';
@@ -7,7 +8,7 @@ import { Briefcase, BookOpen, Users, Eye, MessageSquare, Mail, AlertCircle, Arro
 
 const Dashboard = () => {
   const { language, t } = useLanguage();
-  const navigate = useNavigate();
+  const navigate = useRouter();
   const [stats, setStats] = useState(null);
   const [recentMessages, setRecentMessages] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -70,7 +71,7 @@ const Dashboard = () => {
       <div className="recent-messages-section glass-panel" style={{ marginTop: '40px' }}>
         <div className="section-title-bar">
           <h3>{t('admin.recent_messages')}</h3>
-          <button onClick={() => navigate('/admin/messages')} className="btn btn-secondary text-btn">
+          <button onClick={() => navigate.push('/admin/messages')} className="btn btn-secondary text-btn">
             <span>{language === 'fa' ? 'مشاهده همه' : 'View All'}</span>
             {language === 'fa' ? <ArrowLeft size={16} /> : <ArrowRight size={16} />}
           </button>
@@ -81,7 +82,7 @@ const Dashboard = () => {
         ) : (
           <div className="dashboard-messages-list">
             {recentMessages.map((msg) => (
-              <div key={msg.id} className={`dashboard-msg-item ${msg.status === 'unread' ? 'unread' : ''}`} onClick={() => navigate('/admin/messages')}>
+              <div key={msg.id} className={`dashboard-msg-item ${msg.status === 'unread' ? 'unread' : ''}`} onClick={() => navigate.push('/admin/messages')}>
                 <div className="msg-icon-circle">
                   <Mail size={18} />
                 </div>

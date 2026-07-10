@@ -1,5 +1,7 @@
+"use client";
 import React, { useState, useEffect } from 'react';
-import { useLocation, Link } from 'react-router-dom';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import axios from 'axios';
 import { useLanguage } from '../../context/LanguageContext';
 import { API_BASE_URL } from '../../context/AuthContext';
@@ -17,18 +19,18 @@ const IconMap = {
   Palette: Palette
 };
 
-const Home = () => {
+const Home = ({ initialData }) => {
   const { language, t } = useLanguage();
-  const location = useLocation();
+  const pathname = usePathname();
   
   // Data States
-  const [services, setServices] = useState([]);
-  const [projects, setProjects] = useState([]);
-  const [team, setTeam] = useState([]);
-  const [testimonials, setTestimonials] = useState([]);
-  const [articles, setArticles] = useState([]);
-  const [settings, setSettings] = useState(null);
-  const [homepageSettings, setHomepageSettings] = useState(null);
+  const [services, setServices] = useState(initialData?.services || []);
+  const [projects, setProjects] = useState(initialData?.projects || []);
+  const [team, setTeam] = useState(initialData?.members || []);
+  const [testimonials, setTestimonials] = useState(initialData?.testimonials || []);
+  const [articles, setArticles] = useState(initialData?.articles || []);
+  const [settings, setSettings] = useState(initialData?.settings || null);
+  const [homepageSettings, setHomepageSettings] = useState(initialData?.homepageSettings || null);
 
   // Filter for projects
   const [activeCategory, setActiveCategory] = useState('all');
@@ -40,32 +42,17 @@ const Home = () => {
   // Testimonials Carousel index
   const [testimonialIdx, setTestimonialIdx] = useState(0);
 
-  // Fetch all database records
+  // Scroll logic on mount
   useEffect(() => {
-    // Scroll to section if redirected
-    if (location.state?.scrollTo) {
+    // Scroll to section if hash exists in URL
+    if (typeof window !== 'undefined' && window.location.hash) {
       setTimeout(() => {
-        const element = document.getElementById(location.state.scrollTo);
+        const id = window.location.hash.replace('#', '');
+        const element = document.getElementById(id);
         if (element) element.scrollIntoView({ behavior: 'smooth' });
       }, 100);
     }
-
-    axios.get(`${API_BASE_URL}/api/services/`).then(res => setServices(res.data)).catch(console.error);
-    axios.get(`${API_BASE_URL}/api/projects/`).then(res => setProjects(res.data)).catch(console.error);
-    axios.get(`${API_BASE_URL}/api/members/`).then(res => setTeam(res.data)).catch(console.error);
-    axios.get(`${API_BASE_URL}/api/testimonials/`).then(res => setTestimonials(res.data)).catch(console.error);
-    axios.get(`${API_BASE_URL}/api/articles/`).then(res => setArticles(res.data.slice(0, 3))).catch(console.error); // Latest 3
-    axios.get(`${API_BASE_URL}/api/settings/homepage/`).then(res => setHomepageSettings(res.data.value)).catch(console.error);
-    axios.get(`${API_BASE_URL}/api/settings/general/`).then(res => setSettings(res.data.value)).catch(err => {
-      setSettings({
-        email: 'info@c0team.com',
-        phone: '+98 912 345 6789',
-        address_fa: 'تهران، میدان ونک، برج نگار',
-        address_en: 'Negar Tower, Vanak Sq, Tehran',
-        socials: { github: 'https://github.com', linkedin: 'https://linkedin.com' }
-      });
-    });
-  }, [location]);
+  }, [pathname]);
 
   // Project category filters helper
   const filteredProjects = activeCategory === 'all' 
@@ -331,7 +318,7 @@ const Home = () => {
                 <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', marginBottom: '24px', lineHeight: '1.5' }}>
                   {language === 'fa' ? 'تمام کارهای ما را در صفحه آرشیو مشاهده کنید' : 'Explore all of our work in the archive'}
                 </p>
-                <Link to="/portfolio" className="btn btn-primary" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+                <Link href="/portfolio" className="btn btn-primary" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
                   <span>{language === 'fa' ? 'مشاهده همه' : 'View All'}</span>
                   {language === 'fa' ? <ArrowLeft size={16} /> : <ArrowRight size={16} />}
                 </Link>
@@ -342,7 +329,7 @@ const Home = () => {
 
         {/* View Full Portfolio Button */}
         <div style={{ marginTop: '50px', display: 'flex', justifyContent: 'center' }}>
-          <Link to="/portfolio" className="btn btn-secondary explore-portfolio-btn" style={{ padding: '14px 28px', border: '1px solid var(--border-color)', display: 'inline-flex', alignItems: 'center', gap: '10px' }}>
+          <Link href="/portfolio" className="btn btn-secondary explore-portfolio-btn" style={{ padding: '14px 28px', border: '1px solid var(--border-color)', display: 'inline-flex', alignItems: 'center', gap: '10px' }}>
             <span>{language === 'fa' ? 'مشاهده آرشیو کامل نمونه‌کارها' : 'View Full Portfolio Archive'}</span>
             {language === 'fa' ? <ArrowLeft size={18} /> : <ArrowRight size={18} />}
           </Link>
