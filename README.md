@@ -52,7 +52,8 @@ A modern, high-performance, and fully customizable full-stack portfolio and cont
 │   ├── index.html            # Main HTML entry point
 │   ├── vite.config.js        # Vite build tool configuration
 │   └── package.json          # Node.js dependencies and run scripts
-└── run.bat                   # Windows batch runner to spin up both servers simultaneously
+├── run.bat                   # Windows batch runner to spin up both servers simultaneously
+└── run.sh                    # macOS/Linux shell runner to spin up both servers simultaneously
 ```
 
 ---
@@ -65,8 +66,18 @@ A modern, high-performance, and fully customizable full-stack portfolio and cont
 
 ---
 
-### Run with Windows Launcher (Recommended)
-If you are on Windows, simply double-click the `run.bat` script in the root directory. It will:
+### Quick Start Launcher (Recommended)
+
+**For Windows:**
+Simply double-click the `run.bat` script in the root directory.
+
+**For macOS/Linux:**
+Run the shell script from your terminal:
+```bash
+./run.sh
+```
+
+Both scripts will:
 1. Automatically run `npm install` inside the `frontend` folder if `node_modules` is missing.
 2. Spin up the Django Backend server on [http://127.0.0.1:8000](http://127.0.0.1:8000).
 3. Spin up the React + Vite frontend dev server on [http://localhost:5173](http://localhost:5173).
